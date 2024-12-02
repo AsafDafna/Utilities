@@ -1,0 +1,69 @@
+<!-- 
+    Word Count Display for Text Area in [Fillout](https://www.fillout.com?ref=asafdafna) forms. 
+    This script works with text areas using the `aria-label` attribute. 
+    - Replace "YOUR_UNIQUE_ARIA_LABEL" with the actual `aria-label` of your text input. 
+    - The `aria-label` is typically equivalent to the question's title, but it’s good practice to verify it in the browser's inspection panel.
+-->
+<div class="word-count" data-aria-label="YOUR_UNIQUE_ARIA_LABEL" style="
+    font-size: 16px; 
+    color: #333; 
+    background-color: #f0f0f0; /* Default background color */
+    padding: 8px; 
+    border-radius: 4px; 
+    display: inline-block;
+    margin-top: 5px;
+">
+    Word count: 0
+</div>
+<script>
+    (function() {
+        // Define the maximum allowed word count
+        const MAX_WORD_COUNT = 10; // <-- Set your desired word limit here
+
+        // Select the word count element with the specific data-aria-label
+        const wordCountElement = document.querySelector('.word-count[data-aria-label]');
+        const targetAriaLabel = wordCountElement.getAttribute('data-aria-label');
+
+        // Function to access the parent document
+        function getParentDocument() {
+            try {
+                return window.parent.document;
+            } catch (e) {
+                console.error('Cannot access parent document:', e);
+                return null;
+            }
+        }
+
+        // Initialize elements
+        const parentDoc = getParentDocument();
+        const textarea = parentDoc ? parentDoc.querySelector(`textarea[aria-label="${targetAriaLabel}"]`) : null;
+
+        if (textarea && wordCountElement) {
+            // Function to update the word count and background color
+            function updateWordCount() {
+                const text = textarea.value.trim();
+                const words = text === '' ? 0 : text.split(/\s+/).filter(word => word.length > 0).length;
+                wordCountElement.textContent = 'Word count: ' + words;
+
+                // Check if word count exceeds the maximum limit
+                if (words > MAX_WORD_COUNT) {
+                    // Change background to red shade for warning
+                    wordCountElement.style.backgroundColor = '#f8d7da'; // Light red
+                    wordCountElement.style.color = '#721c24'; // Dark red text for contrast
+                } else {
+                    // Revert to default background color
+                    wordCountElement.style.backgroundColor = '#f0f0f0'; // Default background
+                    wordCountElement.style.color = '#333'; // Default text color
+                }
+            }
+
+            // Listen for input events on the textarea
+            textarea.addEventListener('input', updateWordCount);
+
+            // Initial count
+            updateWordCount();
+        } else {
+            wordCountElement.textContent = 'Word count: Unable to access the text input.';
+        }
+    })();
+</script>
