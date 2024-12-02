@@ -8,3 +8,4 @@ This utility adds a real-time word count feature to text areas in [Fillout](http
 - **Customizable Target**: Works with text areas identified by the `aria-label` attribute. Replace `"YOUR_UNIQUE_ARIA_LABEL"` in the script with the `aria-label` of your target text area.
 - **Optional Word Limit**: Set a maximum word count, and the utility will visually indicate when the limit is exceeded by changing the background and text color of the word count element.
 - **Customizable Colors**: Easily change the default and warning colors to match your form's design.
+![CleanShot 2024-12-02 at 20 53 19](https://github.com/user-attachments/assets/7d8d4ec2-4571-40b2-ad8b-0b46b143d2eb)
