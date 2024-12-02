@@ -1,4 +1,4 @@
-# utilities
+# Utilities
 ## [Word Count Display for Fillout Forms](https://github.com/AsafDafna/utilities/blob/main/fillout_word-count)
 
 This utility adds a real-time word count feature to text areas in [Fillout](https://www.fillout.com?ref=asafdafna) forms. By inserting this HTML/JavaScript snippet as an HTML block in your form, users can track their word count in real time, with an optional limit to improve form usability and accessibility.
